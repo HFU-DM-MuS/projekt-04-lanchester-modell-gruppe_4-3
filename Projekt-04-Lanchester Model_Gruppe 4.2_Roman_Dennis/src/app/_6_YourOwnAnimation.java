@@ -67,11 +67,11 @@ class _6_YourOwnAnimationPanel extends JPanel {
 
 
 	double basePopulation1 = 3000000;                    // "g0" China Population
-	double eff_s = 4;                                // "s" China Effektivitätsparameter
+	double eff_s = 16;                                // "s" China Effektivitätsparameter
 
 
-	double basePopulation2 = 3000000;                    // "h0" Taiwan Population
-	double eff_r = 4;                               // "r" Taiwan Effektivitätsparameter
+	double basePopulation2 = 4000000;                    // "h0" Taiwan Population
+	double eff_r = 9;                               // "r" Taiwan Effektivitätsparameter
 
 
 	double baseLength;                                //Länge zur Berechnung Verhältnis
@@ -84,7 +84,7 @@ class _6_YourOwnAnimationPanel extends JPanel {
 
 
 	//Berechnung für L
-	double l = eff_r * Math.pow(basePopulation1, 2) - eff_s * Math.pow(basePopulation2, 2);
+	double l = eff_s * Math.pow(basePopulation1, 2) - eff_r * Math.pow(basePopulation2, 2);
 
 
 	//Berechnung Simulationszeit wenn Taiwan gewinnt (L<0)
@@ -105,9 +105,19 @@ class _6_YourOwnAnimationPanel extends JPanel {
 		super.paintComponent(g);
 
 		//Auswahl der richtigen Simulationszeit:
-		if ( l > 0 ) { simTime = simTimeC; }
-		if ( l < 0 ) { simTime = simTimeT; }
-		if ( l == 0 ) { simTime = 5; }
+		if ( l > 0 ) {
+			simTime = simTimeC;
+			System.out.println("SimTimeC = " + simTimeC);
+		}
+		if ( l < 0 ) {
+			simTime = simTimeT;
+			System.out.printf("l = %.10f",l);
+			System.out.println("SimTimeT = " + simTimeT);
+		}
+		if ( l == 0 ) {
+			simTime = 5;
+			System.out.println("SimTime = 5");
+		}
 
 		time = (t.getTimeInSeconds()/ timeScale) * simTime;
 
